@@ -296,6 +296,32 @@ function getPalette(count){
       l=30+lightup;
     } else if(type==='triangle'){
       let section=count/3;
+      if (i<section){
+        h=baseHue;
+        s=85;
+        l=70-(i*15);
+      } else if (i<section*2){
+        let secti=i-Math.floor(section);
+        let h2=baseHue+120+(secti*12);
+        if (h2>=360){
+          h=h2-360;
+
+        } else {
+          h=h2;
+        }
+        s=80;
+        l=65-(secti*15)
+      } else {
+        let secthi=i-Math.floor(section*2);
+        let h3=baseHue+240+(secthi*12);
+        if (h3>=360){
+          h=h3-360;
+        } else {
+          h=h3
+        }
+        s=75;
+        l=55-(secthi*15);
+      }
       
 
     }
