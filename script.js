@@ -277,7 +277,7 @@ createGrid();
 const swatchGrid=document.querySelector('.swatch-grid');
 const rollBtn=document.querySelector('.roll-btn');
 const paletteWindow=document.querySelector('.palette-window');
-const paletteTypes=['monochrome','triangle'/*,'analogous', 'complementary', 'retro'*/ ];
+const paletteTypes=[/*'monochrome','triangle','complementary',*/ 'retro' ];
 
 function getPalette(count){
   const type=paletteTypes[Math.floor(Math.random()*paletteTypes.length)];
@@ -323,6 +323,57 @@ function getPalette(count){
         l=55-(secthi*15);
       }
       
+
+    } else if(type=="complementary"){
+      let midpoint=Math.ceil(count/2);
+      if (i<midpoint){
+        h=baseHue;
+        s=80;
+        let gradient=45/midpoint;
+        l=75-(i*gradient);
+      } else{
+        let oppHue=baseHue+180;
+        if (oppHue>=360){
+          h=oppHue-360;
+
+        } else{
+          h=oppHue;
+        }
+        s=80;
+        let remBox=count-midpoint;
+        let zonet=i-midpoint;
+        let gradval=40/remBox;
+        l=75-(zonet*gradval);
+      }
+    } else if(type=='retro') {
+      let rBaseHue=baseHue+(i*65);
+      if (rBaseHue>=720){
+        h=rBaseHue-720;
+        
+      } else if(rBaseHue>=360){
+        h=rBaseHue-360;
+      } else{
+        h=rBaseHue
+      };
+      s=38+(i*4);
+      if (i==0){
+        l=87;
+        s=23;
+      } else if (i==1){
+        l=65
+      }else if (i==2){
+        l=57
+      } else if (i==3){
+        l=45
+      } else if (i==5){
+        l=37;
+      } else if (i==6){
+        l=25;
+      } else if(i==7){
+        l=17;
+      } else if (i==8){
+        l=5;
+      }
 
     }
     colors.push(`hsl(${h},${s}%,${l}%)`);
